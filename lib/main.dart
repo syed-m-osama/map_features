@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:map_features/screens/geo_fencing.dart';
 import 'screens/playback.dart';
-import 'screens/realtime_tracker.dart';
-import 'screens/geo_fencing.dart';
 import 'screens/marker_cluster..dart';
 import 'screens/route_mapping.dart';
-import 'screens/map_icon_change.dart';
-import 'screens/realtime_loc.dart';
-import 'screens/loc_customised_data.dart';
+import 'screens/realtime_location/realtime_loc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,12 +23,9 @@ class MyApp extends StatelessWidget {
       routes: {
         "realtime_loc": (context) => const RealtimeLocCapSend(),
         "route_mapping": (context) => const RouteMapping(),
-        "map_icon_change": (context) => const MapIconChange(),
-        "loc_customised_data": (context) => const LocCustomisedData(),
         "marker_cluster": (context) => const MarkerCluster(),
-        "geo_fencing": (context) => const GeoFencing(),
-        "realtime_tracker": (context) => const RealtimeTracker(),
-        "playback":(context) => const Playback()
+        "geo_fencing": (context) => GeoFencing(),
+        "playback": (context) => const Playback()
       },
     );
   }
@@ -52,15 +46,11 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            RouteButton(title: 'Realtime Loc Cap Send', routeName: 'realtime_loc'),
-            RouteButton(title: 'Route Mapping', routeName: 'route_mapping'),
-            RouteButton(title: 'Map Icon Change', routeName: 'map_icon_change'),
-            RouteButton(title: 'Loc Customised Data', routeName: 'loc_customised_data'),
+            RouteButton(title: 'Realtime Location', routeName: 'realtime_loc'),
             RouteButton(title: 'Marker Cluster', routeName: 'marker_cluster'),
             RouteButton(title: 'Geo-Fencing', routeName: 'geo_fencing'),
-            RouteButton(title: 'Realtime Tracker', routeName: 'realtime_tracker'),
-            RouteButton(title: 'PlayBack', routeName: 'playback')
-
+            RouteButton(title: 'Playback', routeName: 'playback'),
+            RouteButton(title: 'Route Mapping', routeName: 'route_mapping')
           ],
         ),
       ),
@@ -68,9 +58,9 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-
 class RouteButton extends StatelessWidget {
-  const RouteButton({ Key? key ,required this.title, required this.routeName}) : super(key: key);
+  const RouteButton({Key? key, required this.title, required this.routeName})
+      : super(key: key);
 
   final String title;
   final String routeName;
@@ -78,9 +68,9 @@ class RouteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: () => Navigator.pushNamed(context, routeName),
-      child: Text(title),
-      textColor: Colors.white,
-      color: Colors.green[600]);
+        onPressed: () => Navigator.pushNamed(context, routeName),
+        child: Text(title),
+        textColor: Colors.white,
+        color: Colors.green[600]);
   }
 }

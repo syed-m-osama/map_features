@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/services.dart';
+import 'package:flutter_animarker/helpers/math_util.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -29,6 +32,7 @@ class MapSampleState extends State<MapSample> {
   late ClusterManager _manager;
 
   Completer<GoogleMapController> _controller = Completer();
+  late GoogleMapController _googleMapController;
 
   Set<Marker> markers = Set();
 
@@ -78,6 +82,7 @@ class MapSampleState extends State<MapSample> {
           onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);
             _manager.setMapId(controller.mapId);
+            _googleMapController = controller;
           },
           onCameraMove: _manager.onCameraMove,
           onCameraIdle: _manager.updateMap),
@@ -108,6 +113,10 @@ class MapSampleState extends State<MapSample> {
                   );
                 },
               );
+            } else {
+              Future.delayed(Duration(milliseconds: 300), () {
+                _googleMapController.animateCamera(CameraUpdate.zoomBy(1.42));
+              });
             }
           },
           icon: cluster.isMultiple

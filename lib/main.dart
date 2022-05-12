@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:map_features/screens/geo_fencing.dart';
 import 'screens/playback.dart';
 import 'screens/marker_cluster.dart';
-import 'screens/route_mapping.dart';
 import 'screens/realtime_location/realtime_loc.dart';
 
 void main() {
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
       home: const HomePage(),
       routes: {
         "realtime_loc": (context) => const RealtimeLocCapSend(),
-        "route_mapping": (context) => const RouteMapping(),
         "marker_cluster": (context) => const MarkerCluster(),
         "geo_fencing": (context) => GeoFencing(),
         "playback": (context) => const Playback()
